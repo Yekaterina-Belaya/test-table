@@ -1,0 +1,40 @@
+.button {
+    border-radius: 6px;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex; 
+    align-items: center;
+    gap: 15px;
+
+    &.primary {
+        background-color: #242EDB;
+    }
+
+    &.secondary {
+        background-color: #fff;
+        border: 1px solid #ECECEB;
+        color: #B2B3B9;
+    }
+
+    &.small {
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    &.medium {
+        padding: 10px 20px;
+    }
+
+    &.large {
+        padding: 16px;
+        font-size: 18px;
+        line-height: 120%;
+    }
+
+    &.rounded {
+        border-radius: 23px;
+        padding: 2px 15px;
+    }
+}

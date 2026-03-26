@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.input {
+    flex-grow: 0;
+}
+
+.label {
+    color: #9C9C9C;
+    font-size: 16px;
+    line-height: 150%;
+    font-weight: 500;
+}

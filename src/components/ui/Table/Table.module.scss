@@ -1,0 +1,48 @@
+.wrapper {
+    overflow: hidden;
+}
+
+.table {
+    overflow: auto;
+    height: 100%;
+}
+
+.header {
+    color: #B2B3B9;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 18px 24px;
+    background-color: #fff;
+}
+
+.cell {
+    padding: 18px;
+}
+
+.info {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+}
+
+.title {
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.category {
+    font-size: 14px;
+    color: #B2B3B9;
+}
+
+.image {
+    background-color: #C4C4C4;
+    border-radius: 8px;
+    height: 48px;
+    width: 48px;
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
