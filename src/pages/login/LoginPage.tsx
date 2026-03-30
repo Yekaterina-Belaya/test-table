@@ -3,10 +3,10 @@ import { FormControl } from "@/components/ui/FormControl/FormControl";
 import InputText from "@/components/ui/InputText/InputText";
 import { valibotResolver } from "@hookform/resolvers/valibot";
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
-import * as v from "valibot";
 import styles from './LoginPage.module.scss'
 import logo from '../../assets/images/logo.png';
 import { InputCheckbox } from "@/components/ui/InputCheckbox/InputCheckbox";
+import { LoginSchema } from "@/schemas/LoginSchema";
 
 interface IFormInput {
   login: string
@@ -14,15 +14,9 @@ interface IFormInput {
   remember?: boolean
 }
 
-const loginSchema = v.object({
-  login: v.pipe(v.string(), v.minLength(1, "Поле обязательно")),
-  password: v.pipe(v.string(), v.minLength(1, "Поле обязательно")),
-  remember: v.optional(v.boolean(), false)
-});
-
 export const LoginPage = () => {
   const { control, handleSubmit } = useForm<IFormInput>({
-    resolver: valibotResolver(loginSchema),
+    resolver: valibotResolver(LoginSchema),
     mode: "onBlur",
     defaultValues: {
       login: '',

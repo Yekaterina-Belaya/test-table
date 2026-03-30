@@ -5,6 +5,9 @@
 .table {
     overflow: auto;
     height: 100%;
+    width: 100%;
+    background-color: #fff;
+    border-collapse: collapse;
 }
 
 .header {
@@ -15,8 +18,38 @@
     background-color: #fff;
 }
 
+.headerContent {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sortIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .cell {
-    padding: 18px;
+    display: flex;
+    padding: 11px 18px;
+}
+
+.sort svg {
+    opacity: 0;
+}
+
+.sort:hover {
+    cursor: pointer;
+
+    svg {
+        opacity: 1;
+    }
+}
+
+.row {
+    border-bottom: 1px solid #E2E2E2;
+    border-left: 3px solid #fff;
 }
 
 .info {
@@ -45,4 +78,68 @@
         width: 100%;
         height: auto;
     }
+}
+
+.paginationWrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.pagesWrappper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pageBtn {
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #ECECEB;
+    color: #B2B3B9;
+    text-align: center;
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgba(#B2B3B9, .3);
+    }
+}
+
+.pageBtnActive {
+    background-color: #797FEA;
+    color: #fff;
+    border: transparent;
+
+    &:hover {
+        background-color: #797FEA;
+    }
+}
+
+.chevron {
+    color: #B2B3B9;
+}
+
+.pagesInfo {
+    color: #969B9F;
+
+    span {
+        color: #333333;
+    }
+}
+
+.pagesWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Roboto, sans-serif;
+    font-size: 18px;
+    padding: 16px 0;
+    margin-top: 40px;
+    margin-bottom: 37px;
+}
+
+.selectedRow {
+    border-left: 3px solid #3C538E;
 }

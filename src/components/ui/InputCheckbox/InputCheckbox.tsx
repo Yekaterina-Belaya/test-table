@@ -12,8 +12,8 @@ export const InputCheckbox = forwardRef<HTMLInputElement, InputCheckboxProps>(
       const inputId = id || generatedId;
     return (
       <div className={`${styles.wrapper} ${className || ""}`}>
-        <input
-          className={styles.input}
+          <input
+          className={`${styles.hiddenInput}`}
             type="checkbox"
             ref={ref}
             id={inputId}
@@ -21,6 +21,8 @@ export const InputCheckbox = forwardRef<HTMLInputElement, InputCheckboxProps>(
             onChange={onChange}
             {...props}
           />
+        <span className={styles.checkmark}></span>
+
         <label htmlFor={inputId} className={styles.label}>
           {label && <span>{label}</span>}
         </label>

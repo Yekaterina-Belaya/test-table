@@ -15,6 +15,6 @@ type Props = {
 
 export const Button = ({type = 'button', level = 'secondary', size = 'medium', shape = 'square', styleProps, icon, text, onClick, isDisabled}:Props )=> {
     return (
-        <button type={type} className={`${styles.button} ${styles[size]} ${styles[shape]} ${styles[level]}`} style={styleProps} onClick={() => onClick} disabled={isDisabled}>{icon ? <Icon name={icon}></Icon> : null}{text}</button>
+        <button type={type} className={`${styles.button} ${styles[size]} ${styles[shape]} ${styles[level]}`} style={styleProps} onClick={() => onClick()} disabled={isDisabled}>{icon ? <Icon name={icon}></Icon> : null}{text}</button>
     )
 }

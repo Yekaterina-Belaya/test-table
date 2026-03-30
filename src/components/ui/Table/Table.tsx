@@ -1,5 +1,6 @@
 import { flexRender, getSortedRowModel, TableOptions, useReactTable } from "@tanstack/react-table";
 import styles from './Table.module.scss'
+import Icon from "../Icon/Icon";
 
 type Props<T> = {} & TableOptions<T>;
 
@@ -18,17 +19,24 @@ export const Table = <T extends object,>({...rest}:Props<T>) => {
             <table className={styles.table}>
                 <thead className={styles.header}>
                     {headers.map(headerGroup => (
-                        <tr key={headerGroup.id}>
+                        <tr key={headerGroup.id} className={styles.row}>
                             {headerGroup.headers.map(header => (
-                                <th className={styles.cell} key={header.id} onClick={header.column.getToggleSortingHandler()}>
-                                    {flexRender(
-                                        header.column.columnDef.header,
-                                        header.getContext()
-                                    )}
-                                    {{
-                                      asc: ' 🔼',
-                                      desc: ' 🔽',
-                                    }[header.column.getIsSorted() as string] ?? null} 
+                                <th 
+                                  onClick={header.column.getToggleSortingHandler()}
+                                  key={header.id}
+                                >
+                                  <div className={`${styles.headerContent} ${styles.cell} ${styles.sort}`}>
+                                    {flexRender(header.column.columnDef.header, header.getContext())}
+                                    
+                                    <span className={styles.sortIcon}>
+                                      {{
+                                        asc: <Icon name="sortAsc" />,
+                                        desc: <Icon name="sortDesc" />,
+                                      }[header.column.getIsSorted() as 'asc' | 'desc'] ?? (
+                                        header.column.getCanSort() ? <Icon name="sortDefault" /> : null
+                                      )}
+                                    </span>
+                                  </div>
                                 </th>
                             ))}
                         </tr>
@@ -37,10 +45,12 @@ export const Table = <T extends object,>({...rest}:Props<T>) => {
                 <tbody>
                     {
                       rows.map(row => (
-                          <tr key={row.id} className={row.getIsSelected() ? 'selected' : ''}>
+                          <tr key={row.id} className={`${row.getIsSelected() ? styles.selectedRow : ''} ${styles.row}`}>
                               {row.getVisibleCells().map(cell => (
-                                  <td className={styles.cell} key={cell.id}>
+                                  <td  key={cell.id}>
+                                    <div className={styles.cell}>
                                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                    </div>
                                   </td>
                               ))}
                           </tr>
@@ -49,57 +59,56 @@ export const Table = <T extends object,>({...rest}:Props<T>) => {
                 </tbody>
             </table>
 
-            <div className="flex items-center gap-2 mt-4">
-        <button
-          className="border p-1 disabled:opacity-50"
-          onClick={() => table.setPageIndex(0)}
-          disabled={!table.getCanPreviousPage()}
-        >
-          {'<<'}
-        </button>
-        <button
-          className="border p-1 disabled:opacity-50"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Назад
-        </button>
-        <button
-          className="border p-1 disabled:opacity-50"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Вперед
-        </button>
-        <button
-          className="border p-1 disabled:opacity-50"
-          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-          disabled={!table.getCanNextPage()}
-        >
-          {'>>'}
-        </button>
+            <div className={styles.pagesWrapper}>
+              {(() => {
+                const { pageIndex, pageSize } = table.getState().pagination;
+                const totalRows = table.getFilteredRowModel().rows.length;
+                
+                const firstIndex = pageIndex * pageSize + 1;
+                
+                const lastIndex = Math.min(firstIndex + pageSize - 1, totalRows);
 
-        <span className="flex items-center gap-1">
-          <div>Страница</div>
-          <strong>
-            {table.getState().pagination.pageIndex + 1} из{' '}
-            {table.getPageCount()}
-          </strong>
-        </span>
+                if (totalRows === 0) return <p className={styles.pagesInfo}>Нет данных</p>;
 
-        <select
-          value={table.getState().pagination.pageSize}
-          onChange={e => {
-            table.setPageSize(Number(e.target.value))
-          }}
-        >
-          {[5, 10, 20].map(pageSize => (
-            <option key={pageSize} value={pageSize}>
-              Показать {pageSize}
-            </option>
-          ))}
-        </select>
-        </div>
+                return (
+                  <p className={styles.pagesInfo}>
+                    Показано <span>{firstIndex}</span>—<span>{lastIndex}</span> из <span>{totalRows}</span>
+                  </p>
+                );
+              })()}
+              
+                <div className={styles.paginationWrapper}>
+                  <button
+                    className={styles.chevron}
+                    onClick={() => table.setPageIndex(0)}
+                    disabled={!table.getCanPreviousPage()}
+                  >
+                    <Icon name="caretLeft"></Icon>
+                  </button>
+                    <div className={styles.pagesWrappper}>
+                      {Array.from({ length: table.getPageCount() }, (_, i) => i).map((pageIndex) => (
+                        <span
+                          key={pageIndex}
+                          className={`${styles.pageBtn} ${
+                            table.getState().pagination.pageIndex === pageIndex ? styles.pageBtnActive : ''
+                          }`}
+                          onClick={() => table.setPageIndex(pageIndex)}
+                        >
+                          {pageIndex + 1}
+                        </span>
+                      ))}
+                    </div>
+                  <button
+                    className={styles.chevron}
+                    onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                    disabled={!table.getCanNextPage()}
+                  >
+                    <Icon name="caretRight"></Icon>
+                  </button>
+              </div>
+            </div>
+
+
         </div>
     )
 }
