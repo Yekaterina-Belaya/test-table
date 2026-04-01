@@ -2,14 +2,15 @@ import { RouterProvider } from 'react-router-dom'
 import './App.scss'
 import { AuthProvider } from './providers/AuthProvider'
 import { router } from './routes/AppRouter'
-import { HomePage } from './pages/home/HomePage'
+import { Toaster } from 'sonner'
 
 function App() {
   return (
-    // <AuthProvider>
-    //   <RouterProvider router={router}></RouterProvider>
-    // </AuthProvider>
-    <HomePage></HomePage>
+    <AuthProvider>
+      <RouterProvider router={router}></RouterProvider>
+      <Toaster position="bottom-left" richColors />
+    </AuthProvider>
+
   )
 }
 

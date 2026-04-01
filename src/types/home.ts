@@ -1,9 +1,9 @@
-export type RowData = {
+export interface IProduct {
   title: string,
   category?: string,
   img?: string,
-  vendor: string,
-  article: string,
+  brand: string,
+  sku: string,
   rating?: number,
   price: number
 }

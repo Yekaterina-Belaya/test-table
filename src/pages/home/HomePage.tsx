@@ -1,10 +1,8 @@
 import { Table } from "@/components/ui/Table/Table";
 import { InputSearch } from "@/components/ui/InputSearch/InputSearch";
 import { useMemo, useState } from "react";
-import { tableMockData } from "@/data/TableMockData";
 import { Button } from "@/components/ui/Button/Button";
 import { createColumnHelper, getCoreRowModel, getPaginationRowModel, SortingState } from "@tanstack/react-table";
-import { RowData } from "@/types/home";
 import Modal from "@/components/ui/Modal/Modal";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { FormControl } from "@/components/ui/FormControl/FormControl";
@@ -13,74 +11,77 @@ import styles from './HomePage.module.scss'
 import { formatPrice } from "@/utils/formatPrice";
 import Icon from "@/components/ui/Icon/Icon";
 import { InputCheckbox } from "@/components/ui/InputCheckbox/InputCheckbox";
+import { toast } from "sonner";
+import { ProgressBar } from "@/components/ui/ProgressBar/ProgressBar";
+import { useProducts } from "@/hooks/useProducts";
+import { IProduct } from "@/types/home";
+import { useAddProduct } from "@/hooks/useAddProduct";
 
 interface IFormInput {
   title: string
   price: number
-  vendor: string
-  article: string
+  brand: string
+  sku: string
 }
 
 export const HomePage = () => {
-  const [data, setData] = useState<RowData[]>(tableMockData);
   const [sorting, setSorting] = useState<SortingState>([]);
   const [search, setSearch] = useState<string>('');
   const [rowSelection, setRowSelection] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const filteredData = useMemo(() => {
-    const lowSearch = search.toLowerCase().trim();
-    
-    if (!lowSearch) return data;
+  const apiSort = useMemo(() => ({
+  sortBy: sorting[0]?.id || 'title',
+  order: (sorting[0]?.desc ? 'desc' : 'asc') as 'asc' | 'desc'
+}), [sorting]);
 
-    return data.filter((item) => {
-      return (
-        item.title.toLowerCase().includes(lowSearch) ||
-        item.article.toLowerCase().includes(lowSearch)
-      );
-    });
-  },[search, data])
+  const { data, isLoading,  } = useProducts({
+    search: search,
+    sort: apiSort
+  });
 
-    const { control, handleSubmit, reset } = useForm<IFormInput>({
-      defaultValues: {
-        title: '',
-        price: 0,
-        vendor: '',
-        article: ''
-      }
-    })
+  const { mutate } = useAddProduct();
+
+  const { control, handleSubmit, reset } = useForm<IFormInput>({
+    defaultValues: {
+      title: '',
+      price: 0,
+      brand: '',
+      sku: ''
+    }
+  })
   
   const handleSearch = (v:string) => {
     setSearch(v);
-
-    if (search != search) {
-      const result = data.filter((item:RowData) => item.title.toLowerCase().includes(v.toLowerCase()) ||
-      item.article.toLowerCase().includes(v.toLowerCase()))
-
-      setData(result)
-    }
-    
   }
 
   const handleResetTable = () => {
-    console.log('reset');
+    setSearch('');
+    setSorting([]);
+    setRowSelection({});
   }
 
-  const handleOpenModal = () => {
-    console.log('modal');
-    
+  const handleOpenModal = () => {    
     setIsModalOpen(true)
   }
 
   const onSubmit: SubmitHandler<IFormInput> = (item) => {
-      setData((prev) => [...prev, item])
-      setIsModalOpen(false)
-      reset()
+      mutate(item as IProduct, {
+      onSuccess: () => {
+        reset();
+        toast.success('Успешно', {
+          description: 'Товар добавлен в систему',
+        });
+      },
+      onError: () => {
+        toast.error('Ошибка', {
+          description: ' не удалось добавить товар',
+        });
+      }
+    })
+  }
 
-      console.log(filteredData)
-    }
-
-const columnHelper = createColumnHelper<RowData>()
+const columnHelper = createColumnHelper<IProduct>()
 
 const columns = [
   columnHelper.display({
@@ -104,26 +105,26 @@ const columns = [
       </div>
     )
   }),
-  columnHelper.accessor('vendor', {
+  columnHelper.accessor('brand', {
   header: 'Вендор',
-  cell: (data) => {
-    const vendorName = data.getValue();
+  cell: (products) => {
+    const vendorName = products.getValue();
     
     return (
-      <div className={styles.vendor}>
+      <div className={styles.brand}>
         <span>{vendorName}</span>
       </div>
     );
   },
 }),
-  columnHelper.accessor('article', {
+  columnHelper.accessor('sku', {
     header: 'Артикул',
-    cell: data => data.getValue()
+    cell: products => products.getValue()
   }),
   columnHelper.accessor('rating', {
   header: 'Оценка',
-  cell: (data) => {
-    const points = data.getValue();
+  cell: (products) => {
+    const points = products.getValue();
     
     const statusClass = points && points < 3.5 ? styles.outsider : '';
 
@@ -136,8 +137,8 @@ const columns = [
 }),
   columnHelper.accessor('price', {
     header: 'Цена, ₽',
-    cell: (data) => {
-      const price = data.getValue();
+    cell: (products) => {
+      const price = products.getValue();
       const formatted = formatPrice(price);
 
       return (
@@ -152,9 +153,8 @@ const columns = [
     id: 'actions',
     cell: ({row}) => (
       <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
-        <Button type="button" level="primary" size="large" icon="plus" shape="rounded" onClick={() => console.log('Add', row.original)}></Button>
-        <Icon name="dots" className={styles.menuBtn} onClick={() => console.log('Menu', row.original)
-        }></Icon>
+        <Button type="button" level="primary" size="large" icon="plus" shape="rounded"></Button>
+        <Icon name="dots" className={styles.menuBtn}></Icon>
         </div>
     )
   })
@@ -173,9 +173,10 @@ const columns = [
         <Button icon="plusCircle" text="Добавить" level="primary" onClick={() => handleOpenModal()}></Button>
       </div>
     </section>
+    <ProgressBar isFetching={isLoading}></ProgressBar>
     <section className={`${styles.section} ${styles.content}`}>
-      <Table 
-        data={filteredData} 
+      <Table
+        data={data?.products ?? []} 
         columns={columns} 
         state={{
             sorting,
@@ -209,13 +210,13 @@ const columns = [
               </FormControl>
             }></Controller>
 
-                      <Controller name="vendor" control={control} render={({field,fieldState}) => 
+                      <Controller name="brand" control={control} render={({field,fieldState}) => 
               <FormControl error={fieldState.error?.message}>
                 <InputText type="text" label="Вендор" clearable {...field}></InputText>
               </FormControl>
             }></Controller>
 
-                      <Controller name="article" control={control} render={({field,fieldState}) => 
+                      <Controller name="sku" control={control} render={({field,fieldState}) => 
               <FormControl error={fieldState.error?.message}>
                 <InputText type="text" label="Артикул" clearable {...field}></InputText>
               </FormControl>

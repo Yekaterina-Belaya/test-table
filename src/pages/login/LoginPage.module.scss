@@ -1,4 +1,4 @@
-h1 {
+.title {
     font-size: 40px;
     font-weight: 500;
     line-height: 110%;
@@ -7,11 +7,11 @@ h1 {
     text-align: center;
 }
 
-a {
+.link {
     font-weight: 600;
 }
 
-section {
+.sectionWrapper {
     display: flex;
     align-items: center;
     justify-content: center;

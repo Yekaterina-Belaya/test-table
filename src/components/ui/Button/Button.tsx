@@ -9,7 +9,7 @@ type Props = {
     styleProps?: object,
     icon?: string, 
     text?: string,
-    onClick: Function,
+    onClick?: Function,
     isDisabled?: boolean
 }
 

@@ -7,11 +7,12 @@ import styles from './LoginPage.module.scss'
 import logo from '../../assets/images/logo.png';
 import { InputCheckbox } from "@/components/ui/InputCheckbox/InputCheckbox";
 import { LoginSchema } from "@/schemas/LoginSchema";
+import { useLogin } from "@/hooks/useLogin";
 
 interface IFormInput {
   login: string
   password: string
-  remember?: boolean
+  remember: boolean
 }
 
 export const LoginPage = () => {
@@ -25,19 +26,21 @@ export const LoginPage = () => {
     }
   })
 
+  const {mutate} = useLogin();
+
  const onSubmit: SubmitHandler<IFormInput> = (data) => {
-    console.log(data)
+    mutate(data)
   }
 
   return (
-    <section>
-      <article className={styles.wrapper}>
+    <section className={styles.sectionWrapper}>
+      <sku className={styles.wrapper}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <header>
             <div className={styles.logo}>
               <img src={logo} alt="Логотип" />
             </div>
-            <h1>Добро пожаловать!</h1>
+            <h1 className={styles.title}>Добро пожаловать!</h1>
             <span className={styles.subtitle}>Пожалуйста, авторизируйтесь</span>
           </header>
           <div className={styles.fields}>
@@ -69,9 +72,9 @@ export const LoginPage = () => {
               <div className={styles.divider}></div>
             </div>
 
-          <p className={styles.register}>Нет аккаунта? <a href="#">Создать</a></p>
+          <p className={styles.register}>Нет аккаунта? <a className={styles.link} href="#">Создать</a></p>
         </form>
-      </article>
+      </sku>
     </section>
   );
 };
