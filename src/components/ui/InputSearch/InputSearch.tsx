@@ -14,7 +14,6 @@ export const InputSearch = ({onSearchChange, value}:Props) => {
     return (
         <div className={styles.wrapper}>
             <Icon name='search' className={styles.icon}></Icon>
-            <label htmlFor="search">{value}</label>
             <input type="text" id='search' placeholder={'Найти...'} value={value} onChange={onSearch} />
         </div>
     )

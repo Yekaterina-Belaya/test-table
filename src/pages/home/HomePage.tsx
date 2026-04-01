@@ -65,10 +65,16 @@ export const HomePage = () => {
     setIsModalOpen(true)
   }
 
+    const handleCloseModal = () => {    
+    setIsModalOpen(false)
+    reset()
+  }
+
   const onSubmit: SubmitHandler<IFormInput> = (item) => {
       mutate(item as IProduct, {
       onSuccess: () => {
         reset();
+        setIsModalOpen(false);
         toast.success('Успешно', {
           description: 'Товар добавлен в систему',
         });
@@ -97,7 +103,7 @@ const columns = [
     header: 'Наименование',
     cell: ({row}) => (
       <div className={styles.info}>
-        <div className={styles.imgstub}>{row.original.img ? <img src={row.original.img} alt={row.original.title} /> : null}</div>
+        <div className={styles.imgstub}>{row.original.images?.length ? <img src={row.original.images[0]} alt={row.original.title} /> : null}</div>
         <div>
           <p>{row.original.title}</p>
           <p>{row.original.category}</p>
@@ -151,7 +157,7 @@ const columns = [
   }),
   columnHelper.display({
     id: 'actions',
-    cell: ({row}) => (
+    cell: () => (
       <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
         <Button type="button" level="primary" size="large" icon="plus" shape="rounded"></Button>
         <Icon name="dots" className={styles.menuBtn}></Icon>
@@ -193,10 +199,10 @@ const columns = [
     </section>
     <Modal 
         isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+        onClose={() => handleCloseModal()} 
         title="Настройки профиля"
       >
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.fields}>
           <Controller name="title" control={control} render={({field,fieldState}) => 
               <FormControl error={fieldState.error?.message}>

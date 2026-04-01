@@ -25,6 +25,6 @@ export const productService = {
   
   addProduct: async (productData: IProduct) => {
     const { data } = await api.post('/products/add', productData);
-    return v.parse(ProductSchema, data);
+    return v.parse(v.partial(ProductSchema), data);
   },
 };

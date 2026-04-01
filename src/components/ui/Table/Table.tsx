@@ -86,7 +86,7 @@ export const Table = <T extends object>({ columns, ...rest }: TableProps<T>) => 
                 <div className={styles.paginationWrapper}>
                   <button
                     className={styles.chevron}
-                    onClick={() => table.setPageIndex(0)}
+                    onClick={() => table.previousPage()}
                     disabled={!table.getCanPreviousPage()}
                   >
                     <Icon name="caretLeft"></Icon>
@@ -106,7 +106,7 @@ export const Table = <T extends object>({ columns, ...rest }: TableProps<T>) => 
                     </div>
                   <button
                     className={styles.chevron}
-                    onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                    onClick={() => table.nextPage()}
                     disabled={!table.getCanNextPage()}
                   >
                     <Icon name="caretRight"></Icon>

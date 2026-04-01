@@ -1,9 +1,9 @@
 export interface IProduct {
   title: string,
-  category?: string,
-  img?: string,
-  brand: string,
+  category: string,
+  images: string[],
+  brand?: string,
   sku: string,
-  rating?: number,
+  rating: number,
   price: number
 }
