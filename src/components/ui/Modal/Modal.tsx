@@ -2,14 +2,14 @@ import { useEffect, ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './Modal.module.scss'
 
-interface ModalProps {
+type TModalProps = {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
   children: ReactNode;
 }
 
-const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
+const Modal = ({ isOpen, onClose, title, children }: TModalProps) => {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();

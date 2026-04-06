@@ -2,14 +2,14 @@ import { ChangeEvent, forwardRef, InputHTMLAttributes, useId, useState } from 'r
 import Icon from '../Icon/Icon';
 import styles from './InputText.module.scss'
 
-interface InputTextProps extends InputHTMLAttributes<HTMLInputElement> {
+type TInputTextProps = InputHTMLAttributes<HTMLInputElement> & {
   type: 'text' | 'password';
   label?: string;
   icon?: string;
   clearable?: boolean;
 }
 
-const InputText = forwardRef<HTMLInputElement, InputTextProps>(
+const InputText = forwardRef<HTMLInputElement, TInputTextProps>(
   ({ label, className = '', id, type, clearable, icon, onChange, value, name, ...props }, ref) => {
     const [isVisible, setVisible] = useState(false);
     const generatedId = useId();

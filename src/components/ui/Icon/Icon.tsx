@@ -41,12 +41,12 @@
 
   export type IconName = keyof typeof iconMap;
 
-  interface IconProps extends React.SVGProps<SVGSVGElement> {
+  type TIconProps = React.SVGProps<SVGSVGElement> & {
     name: IconName | string;
     size?: 'sm' | 'md' | 'lg' | 'xs';
   }
 
-  const Icon = ({ name, size = 'md', className, ...props }: IconProps) => {
+  const Icon = ({ name, size = 'md', className, ...props }: TIconProps) => {
     const SVGComponent = iconMap[name];
 
     if (!SVGComponent) {

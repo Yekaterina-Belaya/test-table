@@ -1,13 +1,13 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
 
-interface AuthContextType {
+type TAuthContext = {
   user: any | null;       
   isLoading: boolean;     
   login: (userData: any) => void;
   logout: () => void;
 }
 
-export const AuthContext = createContext<AuthContextType | undefined>(undefined);
+export const AuthContext = createContext<TAuthContext | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<any | null>(null);

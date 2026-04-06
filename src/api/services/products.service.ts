@@ -1,6 +1,6 @@
 import * as v from 'valibot';
 import { ProductSchema, ProductsResponseSchema } from '../schemas/product.schema';
-import { IProduct } from '@/types/home';
+import { TProduct } from '@/types/home';
 import api from '../axiosInstance';
 
 export type TSort = {
@@ -23,7 +23,7 @@ export const productService = {
     return v.parse(ProductsResponseSchema, data);
   },
   
-  addProduct: async (productData: IProduct) => {
+  addProduct: async (productData: TProduct) => {
     const { data } = await api.post('/products/add', productData);
     return v.parse(v.partial(ProductSchema), data);
   },

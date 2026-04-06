@@ -1,11 +1,11 @@
 import * as Progress from '@radix-ui/react-progress';
 import styles from './ProgressBar.module.scss';
 
-interface ProgressBarProps {
+type TProgressBarProps = {
   isFetching: boolean;
 }
 
-export const ProgressBar = ({ isFetching }: ProgressBarProps) => {
+export const ProgressBar = ({ isFetching }: TProgressBarProps) => {
   if (!isFetching) return null;
 
   return (

@@ -1,6 +1,6 @@
-import { IProduct } from "@/types/home";
+import { TProduct } from "@/types/home";
 
-export const tableMockData: IProduct[] = [
+export const tableMockData: TProduct[] = [
   {
     title: 'USB Флэшкарта 16GB',
     category: 'Аксессуары',

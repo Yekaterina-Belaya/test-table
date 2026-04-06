@@ -9,14 +9,14 @@ import { InputCheckbox } from "@/components/ui/InputCheckbox/InputCheckbox";
 import { LoginSchema } from "@/schemas/LoginSchema";
 import { useLogin } from "@/hooks/useLogin";
 
-interface IFormInput {
+type TFormInput = {
   login: string
   password: string
   remember: boolean
 }
 
 export const LoginPage = () => {
-  const { control, handleSubmit } = useForm<IFormInput>({
+  const { control, handleSubmit } = useForm<TFormInput>({
     resolver: valibotResolver(LoginSchema),
     mode: "onBlur",
     defaultValues: {
@@ -28,13 +28,13 @@ export const LoginPage = () => {
 
   const {mutate} = useLogin();
 
- const onSubmit: SubmitHandler<IFormInput> = (data) => {
+ const onSubmit: SubmitHandler<TFormInput> = (data) => {
     mutate(data)
   }
 
   return (
     <section className={styles.sectionWrapper}>
-      <sku className={styles.wrapper}>
+      <article className={styles.wrapper}>
         <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
           <header>
             <div className={styles.logo}>
@@ -74,7 +74,7 @@ export const LoginPage = () => {
 
           <p className={styles.register}>Нет аккаунта? <a className={styles.link} href="#">Создать</a></p>
         </form>
-      </sku>
+      </article>
     </section>
   );
 };

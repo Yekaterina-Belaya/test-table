@@ -1,12 +1,12 @@
 import { forwardRef, InputHTMLAttributes, useId } from "react";
 import styles from './InputCheckbox.module.scss'
 
-interface InputCheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'value'> {
+type TInputCheckboxProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value'> & {
   label?: string;
   value?: boolean;
 }
 
-export const InputCheckbox = forwardRef<HTMLInputElement, InputCheckboxProps>(
+export const InputCheckbox = forwardRef<HTMLInputElement, TInputCheckboxProps>(
   ({ label, className, onChange, value, id, ...props }, ref) => {
       const generatedId = useId();
       const inputId = id || generatedId;

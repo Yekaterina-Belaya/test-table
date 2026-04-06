@@ -14,10 +14,10 @@ import { InputCheckbox } from "@/components/ui/InputCheckbox/InputCheckbox";
 import { toast } from "sonner";
 import { ProgressBar } from "@/components/ui/ProgressBar/ProgressBar";
 import { useProducts } from "@/hooks/useProducts";
-import { IProduct } from "@/types/home";
+import { TProduct } from "@/types/home";
 import { useAddProduct } from "@/hooks/useAddProduct";
 
-interface IFormInput {
+type TFormInput = {
   title: string
   price: number
   brand: string
@@ -42,7 +42,7 @@ export const HomePage = () => {
 
   const { mutate } = useAddProduct();
 
-  const { control, handleSubmit, reset } = useForm<IFormInput>({
+  const { control, handleSubmit, reset } = useForm<TFormInput>({
     defaultValues: {
       title: '',
       price: 0,
@@ -70,8 +70,8 @@ export const HomePage = () => {
     reset()
   }
 
-  const onSubmit: SubmitHandler<IFormInput> = (item) => {
-      mutate(item as IProduct, {
+  const onSubmit: SubmitHandler<TFormInput> = (item) => {
+      mutate(item as TProduct, {
       onSuccess: () => {
         reset();
         setIsModalOpen(false);
@@ -87,7 +87,7 @@ export const HomePage = () => {
     })
   }
 
-const columnHelper = createColumnHelper<IProduct>()
+const columnHelper = createColumnHelper<TProduct>()
 
 const columns = [
   columnHelper.display({

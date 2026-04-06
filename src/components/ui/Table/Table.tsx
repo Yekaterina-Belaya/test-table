@@ -2,11 +2,11 @@ import { flexRender, getSortedRowModel, TableOptions, useReactTable } from "@tan
 import styles from './Table.module.scss'
 import Icon from "../Icon/Icon";
 
-interface TableProps<T> extends Omit<TableOptions<T>, 'getCoreRowModel'> {
+type TTableProps<T> = Omit<TableOptions<T>, 'getCoreRowModel'> & {
   getCoreRowModel: any; 
 }
 
-export const Table = <T extends object>({ columns, ...rest }: TableProps<T>) => {
+export const Table = <T extends object>({ columns, ...rest }: TTableProps<T>) => {
   const { data, ...options } = rest;
 
     const table = useReactTable({
