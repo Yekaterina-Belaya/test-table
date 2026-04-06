@@ -1,5 +1,5 @@
-import { LoginInput } from "@/schemas/LoginSchema";
-import api from "../axiosInstance";
+import { LoginInput } from '@/schemas/LoginSchema';
+import api from '../axiosInstance';
 
 export const authService = {
   login: async (data: LoginInput) => {
@@ -20,10 +20,11 @@ export const authService = {
     return response.data;
   },
 
-  getToken: () => localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token'),
-  
+  getToken: () =>
+    localStorage.getItem('auth_token') || sessionStorage.getItem('auth_token'),
+
   logout: () => {
     localStorage.removeItem('auth_token');
     sessionStorage.removeItem('auth_token');
-  }
+  },
 };

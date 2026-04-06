@@ -3,7 +3,7 @@ import styles from './ProgressBar.module.scss';
 
 type TProgressBarProps = {
   isFetching: boolean;
-}
+};
 
 export const ProgressBar = ({ isFetching }: TProgressBarProps) => {
   if (!isFetching) return null;

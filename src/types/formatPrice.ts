@@ -1,4 +1,4 @@
 export type TFormattedPrice = {
-    whole: string,
-    rest: string
-}
+  whole: string;
+  rest: string;
+};

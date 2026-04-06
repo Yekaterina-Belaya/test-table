@@ -1,28 +1,31 @@
 import * as v from 'valibot';
-import { ProductSchema, ProductsResponseSchema } from '../schemas/product.schema';
+import {
+  ProductSchema,
+  ProductsResponseSchema,
+} from '../schemas/product.schema';
 import { TProduct } from '@/types/home';
 import api from '../axiosInstance';
 
 export type TSort = {
-    sortBy: string,
-    order: 'asc' | 'desc'
-}
+  sortBy: string;
+  order: 'asc' | 'desc';
+};
 
 export const productService = {
   getAll: async (sort?: TSort) => {
     const { data } = await api.get('/products', {
-      params: sort?.sortBy ? { sortBy: sort.sortBy, order: sort.order } : {}
+      params: sort?.sortBy ? { sortBy: sort.sortBy, order: sort.order } : {},
     });
     return v.parse(ProductsResponseSchema, data);
   },
-  
+
   searchProducts: async (search: string) => {
     const { data } = await api.get('/products/search', {
-      params: { q: search }
+      params: { q: search },
     });
     return v.parse(ProductsResponseSchema, data);
   },
-  
+
   addProduct: async (productData: TProduct) => {
     const { data } = await api.post('/products/add', productData);
     return v.parse(v.partial(ProductSchema), data);

@@ -1,40 +1,40 @@
 .button {
-    border-radius: 6px;
-    text-align: center;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 500;
-    display: flex; 
-    align-items: center;
-    gap: 15px;
+  border-radius: 6px;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 
-    &.primary {
-        background-color: #242EDB;
-    }
+  &.primary {
+    background-color: #242edb;
+  }
 
-    &.secondary {
-        background-color: #fff;
-        border: 1px solid #ECECEB;
-        color: #B2B3B9;
-    }
+  &.secondary {
+    background-color: #fff;
+    border: 1px solid #ececeb;
+    color: #b2b3b9;
+  }
 
-    &.small {
-        padding: 10px;
-        border-radius: 8px;
-    }
+  &.small {
+    padding: 10px;
+    border-radius: 8px;
+  }
 
-    &.medium {
-        padding: 10px 20px;
-    }
+  &.medium {
+    padding: 10px 20px;
+  }
 
-    &.large {
-        padding: 16px;
-        font-size: 18px;
-        line-height: 120%;
-    }
+  &.large {
+    padding: 16px;
+    font-size: 18px;
+    line-height: 120%;
+  }
 
-    &.rounded {
-        border-radius: 23px;
-        padding: 2px 15px;
-    }
+  &.rounded {
+    border-radius: 23px;
+    padding: 2px 15px;
+  }
 }

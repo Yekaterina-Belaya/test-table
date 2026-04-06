@@ -6,8 +6,9 @@ export const useAddProduct = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (newProduct: Partial<TProduct>) => productService.addProduct(newProduct as TProduct),
-    
+    mutationFn: (newProduct: Partial<TProduct>) =>
+      productService.addProduct(newProduct as TProduct),
+
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['products'] });
     },

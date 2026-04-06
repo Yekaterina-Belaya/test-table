@@ -1,11 +1,23 @@
 .icon {
   display: inline-block;
-  fill: currentColor; 
+  fill: currentColor;
   stroke: currentColor;
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 
-.xs { width: 16px; height: 16px; }
-.sm { width: 22px; height: 22px; }
-.md { width: 24px; height: 24px; }
-.lg { width: 52px; height: 52px; }
+.xs {
+  width: 16px;
+  height: 16px;
+}
+.sm {
+  width: 22px;
+  height: 22px;
+}
+.md {
+  width: 24px;
+  height: 24px;
+}
+.lg {
+  width: 52px;
+  height: 52px;
+}

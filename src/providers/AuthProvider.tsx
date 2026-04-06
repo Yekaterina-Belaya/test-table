@@ -1,11 +1,11 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
 
 type TAuthContext = {
-  user: any | null;       
-  isLoading: boolean;     
+  user: any | null;
+  isLoading: boolean;
   login: (userData: any) => void;
   logout: () => void;
-}
+};
 
 export const AuthContext = createContext<TAuthContext | undefined>(undefined);
 
@@ -14,18 +14,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-  const checkAuth = () => {
-    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-    if (token) {
-      setUser({ id: 1, name: 'Developer' }); 
-    }
-    setIsLoading(false);
-  };
-  checkAuth();
-}, []);
+    const checkAuth = () => {
+      const token =
+        localStorage.getItem('token') || sessionStorage.getItem('token');
+      if (token) {
+        setUser({ id: 1, name: 'Developer' });
+      }
+      setIsLoading(false);
+    };
+    checkAuth();
+  }, []);
 
   const login = (userData: string) => {
-    setUser(userData)
+    setUser(userData);
   };
 
   const logout = () => {

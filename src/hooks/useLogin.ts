@@ -19,20 +19,19 @@ export const useLogin = () => {
         return {
           accessToken: 'fake-jwt-token-123',
           user: { id: 1, name: 'Admin User', role: 'admin' },
-          remember: data.remember
+          remember: data.remember,
         };
       }
     },
     onSuccess: (data) => {
-
       if (!data) {
-        return
+        return;
       }
 
       const storage = data.remember ? localStorage : sessionStorage;
       storage.setItem('token', data.accessToken);
-      
-      login(JSON.stringify(data.user)); 
+
+      login(JSON.stringify(data.user));
       navigate('/', { replace: true });
     },
   });

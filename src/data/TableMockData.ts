@@ -1,4 +1,4 @@
-import { TProduct } from "@/types/home";
+import { TProduct } from '@/types/home';
 
 export const tableMockData: TProduct[] = [
   {
@@ -8,7 +8,7 @@ export const tableMockData: TProduct[] = [
     brand: 'Samsung',
     sku: 'RCH45Q1A',
     rating: 4.3,
-    price: 48652
+    price: 48652,
   },
   {
     title: 'Утюг Braun TexStyle 9',
@@ -17,7 +17,7 @@ export const tableMockData: TProduct[] = [
     brand: 'TexStyle',
     sku: 'DFCHQ1A',
     rating: 4.9,
-    price: 4233
+    price: 4233,
   },
   {
     title: 'Смартфон Apple iPhone 17',
@@ -26,7 +26,7 @@ export const tableMockData: TProduct[] = [
     brand: 'Apple',
     sku: 'GUYHD2-X4',
     rating: 4.7,
-    price: 88652
+    price: 88652,
   },
   {
     title: 'Игровая консоль PlayStation PS5',
@@ -35,7 +35,7 @@ export const tableMockData: TProduct[] = [
     brand: 'Sony',
     sku: 'HT45Q21',
     rating: 4.1,
-    price: 56236
+    price: 56236,
   },
   {
     title: 'Фен Dyson Supersonic Nural ',
@@ -44,6 +44,6 @@ export const tableMockData: TProduct[] = [
     brand: 'Dyson',
     sku: 'FJHHGF-CR4',
     rating: 3.3,
-    price: 48652
-  }
-]
+    price: 48652,
+  },
+];

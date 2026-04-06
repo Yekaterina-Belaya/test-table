@@ -6,8 +6,13 @@ import path from 'path';
 export default defineConfig({
   plugins: [
     svgr({
-    svgrOptions: { exportType: 'default', ref: true, svgo: false, titleProp: true },
-    include: '**/*.svg?react',
+      svgrOptions: {
+        exportType: 'default',
+        ref: true,
+        svgo: false,
+        titleProp: true,
+      },
+      include: '**/*.svg?react',
     }),
     react(),
   ],

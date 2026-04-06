@@ -1,43 +1,43 @@
 .wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
 }
 
 .label {
-    color: #9C9C9C;
-    font-size: 16px;
-    line-height: 150%;
-    font-weight: 500;
+  color: #9c9c9c;
+  font-size: 16px;
+  line-height: 150%;
+  font-weight: 500;
 }
 
 .hiddenInput {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 22px;
-    height: 22px;
-    opacity: 0;
-    cursor: pointer;
-    z-index: 2;
-    margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+  margin: 0;
 }
 
 .checkmark {
-    display: block;
-    width: 22px;
-    height: 22px;
-    border: 2px solid #B2B3B9;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1; 
-    pointer-events: none;
+  display: block;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #b2b3b9;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .hiddenInput:checked + .checkmark {
-  background-color: #3C538E;
-  border-color: #3C538E;
+  background-color: #3c538e;
+  border-color: #3c538e;
 }

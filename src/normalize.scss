@@ -13,7 +13,16 @@ html {
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, 'Segoe UI', Inter, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Inter,
+    Helvetica,
+    Arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji';
 }
 
 hr {
@@ -34,7 +43,8 @@ code,
 kbd,
 samp,
 pre {
-  font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+  font-family:
+    ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: 1em;
 }
 
@@ -70,7 +80,8 @@ textarea {
   background-color: transparent;
   border: transparent;
 
-  &:focus, &:active {
+  &:focus,
+  &:active {
     border: transparent;
   }
 
@@ -118,5 +129,5 @@ img {
 }
 
 a {
-  text-decoration: none;  
+  text-decoration: none;
 }

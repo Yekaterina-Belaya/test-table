@@ -4,22 +4,22 @@ declare module '*.module.scss' {
 }
 
 declare module '*.svg?react' {
-  import { FC, SVGProps } from "react";
+  import { FC, SVGProps } from 'react';
   const content: FC<SVGProps<SVGSVGElement>>;
   export default content;
 }
 
-declare module "*.png" {
+declare module '*.png' {
   const value: string;
   export default value;
 }
 
-declare module "*.jpg" {
+declare module '*.jpg' {
   const value: string;
   export default value;
 }
 
-declare module "*.svg" {
+declare module '*.svg' {
   const value: string;
   export default value;
 }
