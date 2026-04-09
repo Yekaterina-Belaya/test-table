@@ -1,5 +1,5 @@
 import { TUser } from '@/types/user';
-import { createContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useState, useEffect, ReactNode, FC } from 'react';
 
 type TAuthContext = {
   user: TUser | null;
@@ -8,9 +8,13 @@ type TAuthContext = {
   logout: () => void;
 };
 
+type TPropWithChildren = {
+  children: ReactNode
+}
+
 export const AuthContext = createContext<TAuthContext | undefined>(undefined);
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+export const AuthProvider: FC<TPropWithChildren> = ({ children }) => {
   const [user, setUser] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
