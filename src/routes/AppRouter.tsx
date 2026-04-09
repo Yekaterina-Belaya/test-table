@@ -10,10 +10,12 @@ export const router = createBrowserRouter([
   },
   {
     path: '/',
-    element: (
-      <RequireAuth>
-        <HomePage />
-      </RequireAuth>
-    ),
+    element: <RequireAuth/>,
+    children: [
+      {
+        index: true,
+        element: <HomePage />
+      }
+    ],
   },
 ]);

@@ -1,9 +1,10 @@
+import { TUser } from '@/types/user';
 import { createContext, useState, useEffect, ReactNode } from 'react';
 
 type TAuthContext = {
-  user: any | null;
+  user: TUser | null;
   isLoading: boolean;
-  login: (userData: any) => void;
+  login: (userData: TUser) => void;
   logout: () => void;
 };
 
@@ -16,7 +17,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const checkAuth = () => {
       const token =
-        localStorage.getItem('token') || sessionStorage.getItem('token');
+        localStorage.getItem('token');
       if (token) {
         setUser({ id: 1, name: 'Developer' });
       }
@@ -25,7 +26,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     checkAuth();
   }, []);
 
-  const login = (userData: string) => {
+  const login = (userData: TUser) => {
     setUser(userData);
   };
 

@@ -1,5 +1,6 @@
 import {
   flexRender,
+  getCoreRowModel,
   getSortedRowModel,
   TableOptions,
   useReactTable,
@@ -7,26 +8,31 @@ import {
 import styles from './Table.module.scss';
 import Icon from '../Icon/Icon';
 
-type TTableProps<T> = Omit<TableOptions<T>, 'getCoreRowModel'> & {
-  getCoreRowModel: any;
-};
+type TProps<T> = Omit<TableOptions<T>, 'getCoreRowModel' | 'getSortedRowModel'> & {};
 
 export const Table = <T extends object>({
   columns,
-  ...rest
-}: TTableProps<T>) => {
-  const { data, ...options } = rest;
-
+  data: externalData,
+  ...tableOptions
+}: TProps<T>) => {
   const table = useReactTable({
-    ...options,
-    data: data ?? [],
+    data: externalData ?? [],
     columns,
+    ...tableOptions,
+    getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     enableSortingRemoval: true,
   });
 
   const headers = table.getHeaderGroups();
   const { rows } = table.getRowModel();
+
+  const { pageIndex, pageSize } = table.getState().pagination;
+  const totalRows = table.getFilteredRowModel().rows.length;
+
+  const firstIndex = pageIndex * pageSize + 1;
+
+  const lastIndex = Math.min(firstIndex + pageSize - 1, totalRows);
 
   return (
     <div className={styles.wrapper}>
@@ -82,13 +88,6 @@ export const Table = <T extends object>({
 
       <div className={styles.pagesWrapper}>
         {(() => {
-          const { pageIndex, pageSize } = table.getState().pagination;
-          const totalRows = table.getFilteredRowModel().rows.length;
-
-          const firstIndex = pageIndex * pageSize + 1;
-
-          const lastIndex = Math.min(firstIndex + pageSize - 1, totalRows);
-
           if (totalRows === 0)
             return <p className={styles.pagesInfo}>Нет данных</p>;
 

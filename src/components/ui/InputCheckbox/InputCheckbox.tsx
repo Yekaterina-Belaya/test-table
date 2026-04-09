@@ -1,7 +1,7 @@
-import { forwardRef, InputHTMLAttributes, useId } from 'react';
+import { FC, InputHTMLAttributes, useId } from 'react';
 import styles from './InputCheckbox.module.scss';
 
-type TInputCheckboxProps = Omit<
+type TProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
   'value'
 > & {
@@ -9,8 +9,8 @@ type TInputCheckboxProps = Omit<
   value?: boolean;
 };
 
-export const InputCheckbox = forwardRef<HTMLInputElement, TInputCheckboxProps>(
-  ({ label, className, onChange, value, id, ...props }, ref) => {
+export const InputCheckbox: FC<TProps> = 
+  ({ label, className, onChange, value, id, ...props }) => {
     const generatedId = useId();
     const inputId = id || generatedId;
     return (
@@ -18,7 +18,6 @@ export const InputCheckbox = forwardRef<HTMLInputElement, TInputCheckboxProps>(
         <input
           className={`${styles.hiddenInput}`}
           type="checkbox"
-          ref={ref}
           id={inputId}
           checked={!!value}
           onChange={onChange}
@@ -32,6 +31,6 @@ export const InputCheckbox = forwardRef<HTMLInputElement, TInputCheckboxProps>(
       </div>
     );
   }
-);
+;
 
 InputCheckbox.displayName = 'InputCheckbox';

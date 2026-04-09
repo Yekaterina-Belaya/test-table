@@ -4,14 +4,12 @@ import { useMemo, useState } from 'react';
 import { Button } from '@/components/ui/Button/Button';
 import {
   createColumnHelper,
-  getCoreRowModel,
   getPaginationRowModel,
   SortingState,
 } from '@tanstack/react-table';
 import Modal from '@/components/ui/Modal/Modal';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { FormControl } from '@/components/ui/FormControl/FormControl';
-import InputText from '@/components/ui/InputText/InputText';
 import styles from './HomePage.module.scss';
 import { formatPrice } from '@/utils/formatPrice';
 import Icon from '@/components/ui/Icon/Icon';
@@ -21,6 +19,7 @@ import { ProgressBar } from '@/components/ui/ProgressBar/ProgressBar';
 import { useProducts } from '@/hooks/useProducts';
 import { TProduct } from '@/types/home';
 import { useAddProduct } from '@/hooks/useAddProduct';
+import { InputText } from '@/components/ui/InputText/InputText';
 
 type TFormInput = {
   title: string;
@@ -226,7 +225,6 @@ export const HomePage = () => {
           }}
           onSortingChange={setSorting}
           onRowSelectionChange={setRowSelection}
-          getCoreRowModel={getCoreRowModel()}
           getPaginationRowModel={getPaginationRowModel()}
           initialState={{
             pagination: {

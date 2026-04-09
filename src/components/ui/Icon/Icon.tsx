@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import clsx from 'clsx';
 import ArrowUp from '@/assets/icons/arrow_up.svg?react';
 import ArrowsClockwise from '@/assets/icons/arrows_clockwise.svg?react';
@@ -41,18 +41,13 @@ const iconMap = {
 
 export type IconName = keyof typeof iconMap;
 
-type TIconProps = React.SVGProps<SVGSVGElement> & {
-  name: IconName | string;
+type TProps = React.SVGProps<SVGSVGElement> & {
+  name: IconName;
   size?: 'sm' | 'md' | 'lg' | 'xs';
 };
 
-const Icon = ({ name, size = 'md', className, ...props }: TIconProps) => {
+const Icon: FC<TProps> = ({ name, size = 'md', className, ...props }) => {
   const SVGComponent = iconMap[name];
-
-  if (!SVGComponent) {
-    console.warn(`Icon "${name}" not found.`);
-    return null;
-  }
 
   return (
     <SVGComponent

@@ -1,25 +1,20 @@
-import { useEffect, ReactNode } from 'react';
+import { useEffect, ReactNode, FC } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './Modal.module.scss';
 
-type TModalProps = {
+type TPropsWithChildren = {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
   children: ReactNode;
 };
 
-const Modal = ({ isOpen, onClose, title, children }: TModalProps) => {
+const Modal: FC<TPropsWithChildren> = ({ isOpen, onClose, title, children }) => {
   useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
     if (isOpen) {
-      document.addEventListener('keydown', handleEsc);
       document.body.style.overflow = 'hidden';
     }
     return () => {
-      document.removeEventListener('keydown', handleEsc);
       document.body.style.overflow = 'unset';
     };
   }, [isOpen, onClose]);

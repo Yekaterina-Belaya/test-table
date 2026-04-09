@@ -1,8 +1,8 @@
-import { LoginInput } from '@/schemas/LoginSchema';
+import { TLoginInput } from '@/schemas/LoginSchema';
 import api from '../axiosInstance';
 
 export const authService = {
-  login: async (data: LoginInput) => {
+  login: async (data: TLoginInput) => {
     const response = await api.post('/auth/login', {
       login: data.login,
       password: data.password,

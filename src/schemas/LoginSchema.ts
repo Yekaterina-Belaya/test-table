@@ -6,4 +6,4 @@ export const LoginSchema = v.object({
   remember: v.pipe(v.boolean()),
 });
 
-export type LoginInput = v.InferOutput<typeof LoginSchema>;
+export type TLoginInput = v.InferOutput<typeof LoginSchema>;

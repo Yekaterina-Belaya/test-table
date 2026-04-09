@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { useAuth } from './useAuth';
 // import api from '../api/axiosInstance';
-import { LoginInput } from '@/schemas/LoginSchema';
+import { TLoginInput } from '@/schemas/LoginSchema';
 import { useNavigate } from 'react-router-dom';
 
 export const useLogin = () => {
@@ -9,7 +9,7 @@ export const useLogin = () => {
   const navigate = useNavigate();
 
   return useMutation({
-    mutationFn: async (data: LoginInput) => {
+    mutationFn: async (data: TLoginInput) => {
       // const response = await api.post('/auth/login', {
       //   login: data.login,
       //   password: data.password,

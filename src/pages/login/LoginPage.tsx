@@ -8,15 +8,10 @@ import logo from '../../assets/images/logo.png';
 import { InputCheckbox } from '@/components/ui/InputCheckbox/InputCheckbox';
 import { LoginSchema } from '@/schemas/LoginSchema';
 import { useLogin } from '@/hooks/useLogin';
-
-type TFormInput = {
-  login: string;
-  password: string;
-  remember: boolean;
-};
+import { InferOutput } from 'valibot';
 
 export const LoginPage = () => {
-  const { control, handleSubmit } = useForm<TFormInput>({
+  const { control, handleSubmit } = useForm<InferOutput<typeof LoginSchema>>({
     resolver: valibotResolver(LoginSchema),
     mode: 'onBlur',
     defaultValues: {
@@ -28,7 +23,7 @@ export const LoginPage = () => {
 
   const { mutate } = useLogin();
 
-  const onSubmit: SubmitHandler<TFormInput> = (data) => {
+  const onSubmit: SubmitHandler<InferOutput<typeof LoginSchema>> = (data) => {
     mutate(data);
   };
 

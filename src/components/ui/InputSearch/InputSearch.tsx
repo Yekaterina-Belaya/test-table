@@ -1,12 +1,13 @@
+import { FC } from 'react';
 import Icon from '../Icon/Icon';
 import styles from './InputSearch.module.scss';
 
-type Props = {
+type TProps = {
   onSearchChange: Function;
   value: string;
 };
 
-export const InputSearch = ({ onSearchChange, value }: Props) => {
+export const InputSearch: FC<TProps> = ({ onSearchChange, value }) => {
   const onSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSearchChange(event.target.value);
   };
